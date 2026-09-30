@@ -1,0 +1,112 @@
+1. Start the FastAPI Server
+
+Run the following command in the terminal:
+
+uvicorn main:app --reload
+
+You should see something similar to:
+
+INFO:     Uvicorn running on http://127.0.0.1:8000
+INFO:     Application startup complete.
+2. Open the Application
+
+Open a web browser and visit:
+
+http://127.0.0.1:8000
+
+If everything is working correctly, you should see:
+
+Welcome to FastAPI
+Hello, Student!
+3. Test the API Documentation
+
+FastAPI automatically provides interactive API documentation.
+
+Open:
+
+http://127.0.0.1:8000/docs
+
+You can test available API endpoints using the Try it out button.
+
+4. Test an API Endpoint
+
+Example main.py:
+
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+def home():
+    return {"message": "FastAPI is working!"}
+
+@app.get("/hello")
+def hello():
+    return {"message": "Hello, World!"}
+
+Run:
+
+uvicorn main:app --reload
+
+Then visit:
+
+http://127.0.0.1:8000/hello
+
+Expected output:
+
+{
+    "message": "Hello, World!"
+}
+5. Check for Errors
+
+If the application does not work, check the terminal for error messages.
+
+For example:
+
+ERROR:    Application startup failed
+
+Common problems include:
+
+Incorrect Python code
+Missing packages
+Incorrect template directory
+Wrong file name
+Incorrect Uvicorn command
+Port already being used
+6. Verify Successful Deployment
+
+The local deployment is successful when:
+
+The Uvicorn server starts without errors.
+The application opens in the browser.
+API endpoints return the expected responses.
+Jinja2 templates display correctly.
+/docs opens successfully.
+Complete Example
+
+main.py
+
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+def home():
+    return {"message": "Local deployment successful!"}
+
+@app.get("/test")
+def test():
+    return {
+        "status": "success",
+        "message": "FastAPI application is working"
+    }
+
+Run:
+
+uvicorn main:app --reload
+
+Test:
+
+http://127.0.0.1:8000/
+http://127.0.0.1:8000/test
+http://127.0.0.1:8000/docs
