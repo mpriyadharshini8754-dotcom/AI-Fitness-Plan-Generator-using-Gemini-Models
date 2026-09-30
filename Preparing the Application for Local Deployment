@@ -1,0 +1,72 @@
+1. Project Structure
+my_fastapi_app/
+│
+├── main.py
+├── requirements.txt
+└── templates/
+    └── index.html
+2. Create main.py
+from fastapi import FastAPI, Request
+from fastapi.templating import Jinja2Templates
+
+app = FastAPI()
+
+templates = Jinja2Templates(directory="templates")
+
+@app.get("/")
+def home(request: Request):
+    return templates.TemplateResponse(
+        "index.html",
+        {
+            "request": request,
+            "name": "Student"
+        }
+    )
+3. Create index.html
+
+Inside the templates folder:
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FastAPI Application</title>
+</head>
+<body>
+
+    <h1>Welcome to FastAPI</h1>
+    <p>Hello, {{ name }}!</p>
+
+</body>
+</html>
+4. Create requirements.txt
+fastapi
+uvicorn
+jinja2
+5. Install the Required Packages
+
+Open the terminal in the project folder:
+
+pip install -r requirements.txt
+6. Run the Application Locally
+uvicorn main:app --reload
+
+The application will run at:
+
+http://127.0.0.1:8000
+
+Open this address in a web browser.
+
+7. Stop the Application
+
+Press:
+
+Ctrl + C
+Important Commands
+# Install dependencies
+pip install -r requirements.txt
+
+# Start FastAPI
+uvicorn main:app --reload
+
+# Start on a specific port
+uvicorn main:app --reload --port 8080
