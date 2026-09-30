@@ -1,0 +1,63 @@
+. Install required packages
+pip install fastapi uvicorn jinja2
+2. Project structure
+project/
+│
+├── main.py
+└── templates/
+    └── index.html
+3. FastAPI code — main.py
+from fastapi import FastAPI, Request
+from fastapi.templating import Jinja2Templates
+
+app = FastAPI()
+
+templates = Jinja2Templates(directory="templates")
+
+@app.get("/")
+def home(request: Request):
+    name = "Yogeshwaran"
+    course = "Python"
+
+    return templates.TemplateResponse(
+        "index.html",
+        {
+            "request": request,
+            "name": name,
+            "course": course
+        }
+    )
+4. Jinja2 template — templates/index.html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Page</title>
+</head>
+<body>
+
+    <h1>Welcome, {{ name }}!</h1>
+
+    <p>You are learning {{ course }}.</p>
+
+</body>
+</html>
+How it works
+Jinja2Templates connects FastAPI with Jinja2.
+TemplateResponse() loads the HTML template.
+{{ name }} and {{ course }} are Jinja2 variables.
+FastAPI sends Python values to the HTML template.
+Jinja2 replaces the variables with their actual values.
+
+Run the application:
+
+uvicorn main:app --reload
+
+Then open:
+
+http://127.0.0.1:8000/
+
+Output:
+
+Welcome, Yogeshwaran!
+
+You are learning Python.
